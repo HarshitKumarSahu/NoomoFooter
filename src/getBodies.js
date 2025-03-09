@@ -43,7 +43,7 @@ const sceneMiddle = new THREE.Vector3(0, 0, 0);
 //   }
 
 const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load("/alpha.png");
+const texture = textureLoader.load("/alpha.png/no");
 
 function getBody(RAPIER, world) {
     const size = 0.15 + Math.random() * 0.25;
@@ -65,8 +65,8 @@ function getBody(RAPIER, world) {
     // Material with texture
     const material = new THREE.MeshStandardMaterial({
         map: texture, // Apply texture
-        roughness: 0.1, // Adjust material properties
-        metalness: 0.1,
+        roughness: 0.5, // Adjust material properties
+        metalness: 0.5,
         flatShading: true
     });
 

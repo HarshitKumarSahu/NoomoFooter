@@ -27,10 +27,10 @@ const camera = new THREE.OrthographicCamera(
 camera.position.set(0, 0, 4); // Keep it at a fixed distance
 camera.lookAt(0, 0, 0);       // Always look at the center
 
-
-const renderer = new THREE.WebGLRenderer({ antialias: true , alpha: true});
+const canvas = document.querySelector('.canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true , alpha: true});
 renderer.setSize(w, h);
-document.body.appendChild(renderer.domElement);
+// document.body.appendChild(renderer.domElement);
 
 let mousePos = new THREE.Vector2();
 await RAPIER.init();
