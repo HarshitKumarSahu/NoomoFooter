@@ -5,6 +5,8 @@ import RAPIER from "@dimforge/rapier3d-compat";
 // import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 // import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 // import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -37,7 +39,7 @@ await RAPIER.init();
 const gravity = { x: 0.0, y: 0.0, z: 0 };
 const world = new RAPIER.World(gravity);
 
-const numBodies = 80;
+const numBodies = 60;
 const bodies = [];
 for (let i = 0; i < numBodies; i++) {
   const body = getBody(RAPIER, world);
@@ -69,6 +71,96 @@ rgbeLoader.load("/photo_studio_01_1k.hdr", function (texture) {
 // composer.addPass(renderScene);
 // composer.addPass(bloomPass);
 */
+
+
+// const loader = new GLTFLoader();
+// loader.load("/Scene14.glb", (gltf) => {
+//     const model = gltf.scene;
+    
+//     // Center the model at (0,0,0)
+//     model.position.set(0, -23.75, 2.5);
+
+//     // Adjust scale if needed
+//     model.scale.set(0.5, 0.5, 0.5);
+
+//     // Ensure the model is facing correctly
+//     model.rotation.set(0, 0, 0);
+
+//     // Add the model to the scene
+//     scene.add(model);
+// }, 
+// // onProgress callback
+// (xhr) => {
+//     console.log(`Model ${(xhr.loaded / xhr.total) * 100}% loaded`);
+// }, 
+// // onError callback
+// (error) => {
+//     console.error("Error loading the model:", error);
+// });
+
+
+
+const loader = new GLTFLoader();
+loader.load(
+    "/Scene14.glb",
+    (gltf) => {
+        const model = gltf.scene;
+
+        // ✅ Center the model at (0, 0, 0)
+        model.position.set(0, -23.75, 2.5);
+
+        // ✅ Adjust scale if needed
+        model.scale.set(0.5, 0.5, 0.5);
+
+        // ✅ Ensure the model is facing correctly
+        model.rotation.set(0, 0, 0);
+
+        // ✅ Update material properties (Metalness & Roughness)
+        // model.traverse((child) => {
+        //     if (child.isMesh && child.material) {
+        //         child.material.metalness = 0.1;  // Higher reflectivity
+        //         child.material.roughness = 0.1; // Smoother surface
+        //         child.material.needsUpdate = true;
+        //     }
+        // });
+
+        model.traverse((child) => {
+          if (child.isMesh) {
+              child.geometry.computeVertexNormals(); // Fix normal smoothing
+      
+              child.material = new THREE.MeshPhysicalMaterial({
+                  color: child.material.color,
+                  roughness: 0.0,
+                  metalness: 1.0,
+                  clearcoat: 1.0,
+                  clearcoatRoughness: 0.0,
+                  transmission: 1.0,
+                  ior: 1.52,
+                  thickness: 0.3,
+                  envMapIntensity: 2.5,
+                  side: THREE.DoubleSide
+              });
+      
+              child.material.needsUpdate = true;
+          }
+      });
+      
+      
+      
+
+        // ✅ Add the model to the scene
+        scene.add(model);
+        console.log("Model loaded successfully!");
+    },
+    (xhr) => {
+        console.log(`Model ${Math.round((xhr.loaded / xhr.total) * 100)}% loaded`);
+    },
+    (error) => {
+        console.error("Error loading the model:", error);
+    }
+);
+
+
 
 function animate() {
   requestAnimationFrame(animate);
