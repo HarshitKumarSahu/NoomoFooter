@@ -15,7 +15,10 @@ const scene = new THREE.Scene();
 // camera.position.z = 4;
 
 const aspect = w / h;
-const frustumSize = 2; // Adjust this value to scale the view
+
+// const frustumSize = 2; // Adjust this value to scale the view
+const frustumSize = window.innerWidth < 600 ? 3 : 2;
+
 
 const camera = new THREE.OrthographicCamera(
     -frustumSize * aspect, // Left
@@ -71,33 +74,6 @@ rgbeLoader.load("/photo_studio_01_1k.hdr", function (texture) {
 // composer.addPass(renderScene);
 // composer.addPass(bloomPass);
 */
-
-
-// const loader = new GLTFLoader();
-// loader.load("/Scene14.glb", (gltf) => {
-//     const model = gltf.scene;
-    
-//     // Center the model at (0,0,0)
-//     model.position.set(0, -23.75, 2.5);
-
-//     // Adjust scale if needed
-//     model.scale.set(0.5, 0.5, 0.5);
-
-//     // Ensure the model is facing correctly
-//     model.rotation.set(0, 0, 0);
-
-//     // Add the model to the scene
-//     scene.add(model);
-// }, 
-// // onProgress callback
-// (xhr) => {
-//     console.log(`Model ${(xhr.loaded / xhr.total) * 100}% loaded`);
-// }, 
-// // onError callback
-// (error) => {
-//     console.error("Error loading the model:", error);
-// });
-
 
 
 const loader = new GLTFLoader();

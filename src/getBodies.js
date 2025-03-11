@@ -2,9 +2,6 @@ import * as THREE from "three";
 
 const sceneMiddle = new THREE.Vector3(0, 0, 0);
 
-// const textureLoader = new THREE.TextureLoader();
-// const texture = textureLoader.load("/alpha.png/no");
-
 function getBody(RAPIER, world) {
     const size = 0.2 + Math.random() * 0.2;
     const range = 6;
@@ -24,24 +21,22 @@ function getBody(RAPIER, world) {
 
     // Material with texture
     const material = new THREE.MeshStandardMaterial({
-        // map: texture, // Apply texture
-        // color : "#F04924",
         color: "#C3CAD8",
         roughness: 0.0,
         metalness: 0.0,
-        // flatShading: true
+        flatShading: true
     });
 
     const mesh = new THREE.Mesh(geometry, material);
 
-    // Wireframe effect (optional)
-    const wireMat = new THREE.MeshBasicMaterial({
-        color: "#888",
-        wireframe: true
-    });
-    const wireMesh = new THREE.Mesh(geometry, wireMat);
-    wireMesh.scale.setScalar(1.01);
-    mesh.add(wireMesh);
+    // // Wireframe effect (optional)
+    // const wireMat = new THREE.MeshBasicMaterial({
+    //     color: "#888",
+    //     wireframe: true
+    // });
+    // const wireMesh = new THREE.Mesh(geometry, wireMat);
+    // wireMesh.scale.setScalar(1.01);
+    // mesh.add(wireMesh);
 
     function update() {
         rigid.resetForces(true);
@@ -62,8 +57,8 @@ function getMouseBall(RAPIER, world) {
     const geometry = new THREE.IcosahedronGeometry(mouseSize, 1);
     const material = new THREE.MeshStandardMaterial({
         color: 0xffffff,
-        transparent: true,  // Enable transparency
-        opacity: 0,       // Adjust opacity (0 = fully transparent, 1 = fully opaque)
+        transparent: true,  
+        opacity: 0,      
         emissive: 0xffffff,
     });
     const mouseMesh = new THREE.Mesh(geometry, material);

@@ -2,11 +2,11 @@ import gsap from "gsap";
 
 const footerLogo = document.querySelector('.footerlogo img');
 let step = 0;
-let direction = 1; // 1 for forward, -1 for reverse
+let direction = 1; 
 
 function slideLogo() {
-    const imgWidth = footerLogo.clientWidth; // Get total image width
-    const stepWidth = imgWidth / 8; // Divide into 8 parts
+    const imgWidth = footerLogo.clientWidth; 
+    const stepWidth = imgWidth / 8; 
 
     gsap.to(footerLogo, { 
         x: -step * stepWidth, 
@@ -17,11 +17,11 @@ function slideLogo() {
     step += direction;
 
     if (step === 7 || step === 0) {
-        direction *= -1; // Reverse the direction
+        direction *= -1; 
     }
 }
 
-setInterval(slideLogo, 500); // Move every 500ms
+setInterval(slideLogo, 500); 
 
 
 let as = document.querySelectorAll("a");
