@@ -29,14 +29,6 @@ function getBody(RAPIER, world) {
 
     const mesh = new THREE.Mesh(geometry, material);
 
-    // // Wireframe effect (optional)
-    // const wireMat = new THREE.MeshBasicMaterial({
-    //     color: "#888",
-    //     wireframe: true
-    // });
-    // const wireMesh = new THREE.Mesh(geometry, wireMat);
-    // wireMesh.scale.setScalar(1.01);
-    // mesh.add(wireMesh);
 
     function update() {
         rigid.resetForces(true);

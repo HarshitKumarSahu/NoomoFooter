@@ -2,21 +2,15 @@ import * as THREE from "three";
 import { getBody, getMouseBall } from "../src/getBodies.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import RAPIER from "@dimforge/rapier3d-compat";
-// import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
-// import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
-// import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 
 const w = window.innerWidth;
 const h = window.innerHeight;
 const scene = new THREE.Scene();
-// const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
-// camera.position.z = 4;
 
 const aspect = w / h;
 
-// const frustumSize = 2; // Adjust this value to scale the view
 const frustumSize = window.innerWidth < 600 ? 3 : 2;
 
 
@@ -35,7 +29,6 @@ camera.lookAt(0, 0, 0);       // Always look at the center
 const canvas = document.querySelector('.canvas');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true , alpha: true});
 renderer.setSize(w, h);
-// document.body.appendChild(renderer.domElement);
 
 let mousePos = new THREE.Vector2();
 await RAPIER.init();
@@ -66,16 +59,6 @@ rgbeLoader.load("/photo_studio_01_1k.hdr", function (texture) {
   scene.environment = texture;
 });
 
-/*
-// Post-processing (Commented Out)
-// const renderScene = new RenderPass(scene, camera);
-// const bloomPass = new UnrealBloomPass(new THREE.Vector2(w, h), 2.0, 0.0, 0.005);
-// const composer = new EffectComposer(renderer);
-// composer.addPass(renderScene);
-// composer.addPass(bloomPass);
-*/
-
-
 const loader = new GLTFLoader();
 loader.load(
     "/Scene14.glb",
@@ -90,15 +73,6 @@ loader.load(
 
         // ✅ Ensure the model is facing correctly
         model.rotation.set(0, 0, 0);
-
-        // ✅ Update material properties (Metalness & Roughness)
-        // model.traverse((child) => {
-        //     if (child.isMesh && child.material) {
-        //         child.material.metalness = 0.1;  // Higher reflectivity
-        //         child.material.roughness = 0.1; // Smoother surface
-        //         child.material.needsUpdate = true;
-        //     }
-        // });
 
         model.traverse((child) => {
           if (child.isMesh) {
@@ -121,9 +95,6 @@ loader.load(
           }
       });
       
-      
-      
-
         // ✅ Add the model to the scene
         scene.add(model);
         console.log("Model loaded successfully!");
