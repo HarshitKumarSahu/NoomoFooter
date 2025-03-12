@@ -17,7 +17,7 @@ html, body {
     overflow: hidden;
     /* background-color: #F5E1CE; */
     /* background-color: #D9D7E0; */
-    background: url('/background3.png');
+    background: url('/background2.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -149,6 +149,7 @@ button {
 @media screen and (max-width: 600px) {
     body {
         overflow: hidden;
+        background: url('/background3.png');
     }
     a {
         font-size: 1em;
@@ -159,6 +160,7 @@ button {
     a:nth-child(2) {
         display: none;
     }
+
     .footer .mb {
         display: block;
         font-size: 1em;
